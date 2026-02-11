@@ -1,0 +1,2 @@
+# Notes
+This folder contains all of my lecture notes from the TCL internship. Each week has its own folder, with a single README combining notes from both lectures. Topics cover a wide range of cybersecurity concepts, including security mindsets, Linux and Windows internals, networking, GRC, Active Directory, web and SCADA security, DFIR, API and DevOps security, post-exploitation, and penetration testing.
