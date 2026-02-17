@@ -180,7 +180,7 @@ Ensures alignment with:
 - Cybersecurity laws  
 - Environmental compliance  
 
-### **ISO/IEC 27001 – Information Security Management System (ISMS):**  
+### **ISO/IEC 27001: Information Security Management System (ISMS):**  
 - Certifiable standard for ISMS  
 - Audit leads to certification if requirements are met  
 - Core Concept: Risk-based security management using the PDCA cycle  
@@ -218,7 +218,7 @@ Ensures alignment with:
 - Access control: Mechanisms to ensure only authorized users can access systems and data.  
 - Business continuity integration: Aligning security and continuity plans to maintain operations during disruptions.
 
-### **ISO 42001 – AI Management System:**  
+### **ISO 42001: AI Management System:**  
 - Focus: Ethical AI, responsible AI, risk-based AI governance  
 - Addresses algorithmic bias, lack of explainability, privacy, model drift, and security vulnerabilities  
 
