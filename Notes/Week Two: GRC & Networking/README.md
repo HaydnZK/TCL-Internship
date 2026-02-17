@@ -350,12 +350,215 @@ GRC integrates ESG oversight into governance to align ethical, environmental, an
 
 ## Quiz Reference
 The quiz covered:  
-
 - Risk appetite determination  
 - AI governance and control failures (ISO 42001)  
 - ERM alignment and governance weaknesses  
 - Control mapping benefits for ISO 27001  
-- Third-party risk management failures  
+- Third-party risk management failures
+
+---
+
+# Networking Fundamentals
+## Why Networking Fundamentals Matter
+- Ever attack crosses a network: Most attacks exploit network vulnerabilities to access systems.  
+- Every detection relies on traffic: Security monitoring depends on analyzing network flows and logs.  
+- Cloud = networking abstraction: Cloud resources are accessed over networks, making network knowledge essential.  
+- Logs mean nothing without packet understanding: Understanding raw traffic and packet flows is crucial for accurate threat detection.  
+
+Tools like SIEMs and packet analyzers monitor network traffic, detect anomalies, and track attack paths. Network compromise, through techniques like ARP poisoning, ICMP attacks, or spoofing, can allow attackers to move laterally and access sensitive data.
+
+## What is a Network?
+- Devices connected to exchange data: Computers, servers, routers, switches, and other endpoints.  
+- Nodes (hosts): Individual devices or endpoints in a network.  
+- Links (wired/wireless): Physical or wireless connections enabling data transfer.  
+- Protocols (rules of communication): Standards that define how devices exchange information.  
+
+Network diagrams show connectivity between desktops, switches, routers, and the wider internet.
+
+## How Data Moves
+Visiting a website involves multiple network interactions:  
+- **DNS resolution**: Converts domain names to IP addresses.  
+- **TCP handshake**: Establishes a reliable connection between client and server.  
+- **TLS negotiation**: Creates a secure, encrypted communication channel.  
+- **HTTP request**: Sends GET/POST requests to retrieve or submit data.  
+- **Data transmission**: Data moves across the network to the client.  
+- **Connection termination**: Closes the session once communication is complete.  
+
+Each step interacts with different layers of the protocol stack.
+
+## OSI Model (Layer: Function: Security Relevance)
+- 7. Application: User-level protocols (SQL injection, XSS attacks).  
+- 6. Presentation: Encryption/encoding (TLS, SSL).  
+- 5. Session: Session management (session hijacking).  
+- 4. Transport: Reliable delivery (SYN flood).  
+- 3. Network: Logical addressing (IP spoofing).  
+- 2. Data Link: MAC addressing (ARP spoofing).  
+- 1. Physical: Bits on medium (cable tapping).  
+
+**Notes:** TCP handshakes occur at Layer 4, DNS lives at Layer 7. Physical tapping allows attackers to intercept unprotected traffic.
+
+### TCP/IP Stack (Layer: Protocol Examples)
+- 4. Application: HTTP, FTP, DNS  
+- 3. Transport: TCP, UDP  
+- 2. Internet: IP, ICMP  
+- 1. Network Access: Ethernet, ARP  
+
+This model simplifies the OSI stack by combining layers: Application merges OSI layers 5–7, Internet replaces Network, and Network Access includes both Data Link and Physical layers.
+
+## IPv4 Addressing
+- Structure: 32 bits (e.g., 192.168.1.10)  
+- Binary format: 11000000.10101000.00000001.00001010  
+- Address types:  
+  - Unicast: One-to-one communication  
+  - Broadcast: One-to-all communication  
+  - Multicast: One-to-many communication  
+
+## MAC Addressing and Ethernet
+- MAC address: 48-bit hardware identifier (e.g., 00:1A:2B:3C:4D:5E)  
+
+### **Ethernet Frame Structure:**  
+- Destination MAC: Target device  
+- Source MAC: Sending device  
+- EtherType: Specifies protocol or media type  
+- Payload: Actual data  
+- Frame Check Sequence: Ensures frame integrity  
+
+Layer 2 operates within the local broadcast domain.
+
+## ARP Mechanism
+Purpose: Resolve IP addresses to MAC addresses within a local network.  
+Process:  
+- Broadcast: “Who has 192.168.1.10?”  
+- Target replies with MAC address  
+- Entry stored in ARP cache  
+- No authentication, vulnerable to spoofing  
+
+## TCP Protocol
+Ensures: reliable transmission, ordered delivery, flow control, congestion control.  
+
+### **Three-way handshake:**  
+- SYN: Client → Server  
+- SYN-ACK: Server → Client  
+- ACK: Client → Server  
+
+**Connection termination:** FIN, ACK, FIN, ACK  
+
+### **TCP header structure:**  
+- Source/Dest ports: Identify the sending and receiving applications on the hosts.  
+- Sequence number: Tracks the order of bytes sent for reliable delivery.  
+- ACK number: Confirms receipt of data from the other side.  
+- DO (Data Offset): Indicates where the header ends and data begins.  
+- RSV (Reserved bits): Reserved for future use; must be set to zero or handled according to protocol.  
+- Flags (SYN, ACK, FIN): Control connection establishment, acknowledgment, and termination.  
+- Window: Specifies the amount of data the receiver can accept before sending an acknowledgment.  
+- Checksum: Ensures integrity of the header and payload during transmission.  
+- Urgent pointer: Marks data that requires immediate processing.  
+- Options: Additional features or parameters, such as timestamps or maximum segment size.
+
+TCP is like reliable mail delivery: ensures data arrives in order and intact.
+
+## UDP Protocol
+**Characteristics:** 
+- No handshake
+- no retransmission
+- no ordering
+- low overhead  
+
+### Common Uses: 
+- DNS
+- Streaming
+- Gaming
+- VoIP  
+
+UDP is faster but unreliable, trading reliability for speed.
+
+## Ports and Sockets
+- Port ranges: 0–1023 well-known, 1024–49151 registered, 49152–65535 ephemeral  
+- Socket: IP + port + protocol (e.g., 192.168.1.10:443 TCP)  
+
+Port scanning identifies exposed services.
+
+## DNS
+- Hierarchy: Root → TLD → Authoritative servers  
+- Query types: A (IPv4), AAAA (IPv6), MX, TXT  
+- Uses UDP port 53  
+
+Example domain flow: thecyberledger.in → DNS servers → redirected to the app without exposing IP.
+
+## IPv4 Header Fields
+Version, Header length, Total length, Identification, Flags, Fragment offset, TTL, Protocol, Header checksum, Source IP, Destination IP  
+
+TTL prevents infinite routing loops.
+
+## Routing Concepts
+- Routing table: Destination network, Next hop, Interface, Metric  
+- Static vs Dynamic routing: RIP, OSPF, BGP  
+- Routers forward packets based on the best match rule  
+
+## NAT
+Translates private IPs to public IPs:  
+- Static NAT: Fixed mapping  
+- Dynamic NAT: Variable mapping  
+- PAT: Many-to-one mapping  
+Conserves IPv4 addresses and hides internal network structure.
+
+## Firewalls
+- Packet filtering: IP/Port-based filtering  
+- Stateful: Tracks connection states  
+- Application: Inspects payload  
+- Next Gen: Deep packet inspection + IDS/IPS  
+
+Tools like Snort and Wireshark help monitor and analyze traffic.
+
+## Wireless Encryption
+WPA1-3 protects Wi-Fi networks.
+
+## ICMP & Diagnostics
+- ICMP functions: Ping, Destination unreachable, Time exceeded  
+- Diagnostic tools: ping, traceroute/tracert  
+
+ICMP attacks (echo/relay/reply) can cause DoS.
+
+## TLS & Encryption Flow
+**TLS Handshake:** Client hello → Server hello → Certificate exchange → Key exchange → Encrypted session begins  
+
+### Protections: 
+- Confidentiality
+- Integrity
+- Authentication
+
+## Common Network Attacks  
+- **Layer 2: ARP spoofing**: An attacker sends fake ARP messages to associate their MAC address with another host’s IP, allowing interception or modification of traffic within a local network.  
+- **Layer 3: IP spoofing**: Forging the source IP address in packets to masquerade as a trusted host, bypass filters, or redirect traffic.  
+- **Layer 4: SYN flood**: Overwhelming a target with TCP SYN requests without completing the handshake, exhausting resources and causing denial of service.  
+- **Layer 7: HTTP flood, SQLi**: Application-level attacks; HTTP floods overload web servers with requests, while SQL injection manipulates database queries to extract or alter data.
+
+Infrastructure attacks: BGP hijacking, DNS poisoning
+
+## Packet Analysis Tools
+Wireshark, TCPDump, NetFlow, ss, netstat  
+
+Packet captures reveal: source/destination IP, protocol, TTL, fragmentation details, flags, sequence numbers, window size
+
+## Network Segmentation & Security
+- VLANs: Isolate network segments  
+- Subnets: Split larger networks into smaller ones  
+- DMZ: Separate zone between internal network and internet  
+- Zero Trust Architecture: Minimize lateral movement and blast radius  
+
+## Quiz Summary
+The quiz emphasized:  
+- Routing and next-hop selection  
+- TCP handshake and troubleshooting issues  
+- OSPF path selection and reference bandwidth  
+- Logical addressing (Network layer)  
+- UDP characteristics vs TCP  
+- VLAN purposes  
+- TCP congestion control (AIMD)  
+- Multicast addressing  
+
+It reinforced understanding of traffic flow, protocol behavior, network design, and common attack vectors.
+
 - Risk-based control implementation  
 - Internal and external audit principles  
 - Cyber resilience and business continuity metrics  
