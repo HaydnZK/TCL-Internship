@@ -85,7 +85,7 @@ Risk communication appears to have been ineffective. Although the CVEs were disc
 
 ---
 
-# 4. ISO 42001: Artificial Intelligence Management Systems
+# ISO 42001: Artificial Intelligence Management Systems
 ## i. Overview
 ISO/IEC 42001:2023 Information Technology - Artificial Intelligence - Management System was officially published in December 2023 and aims to provide a framework for organizations establishing, implementing, maintaining, and continually improving Artificial Intelligence Management Systems (AIMS). An AIMS is designed as a continuous management system that spans the entire AI lifecycle, ensuring accountability, governance, and regulatory compliance in a rapidly evolving technological landscape.
 
