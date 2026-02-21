@@ -78,6 +78,10 @@ Risk communication appears to have been ineffective. Although the CVEs were disc
 |----------|------------------|-------|
 | ISO 27001 A 5.7 Threat Intelligence | Yes | Critical CVEs affecting core infrastructure were not acted upon with sufficient urgency |
 | ISO 27001 A 5.15 Access Control | Yes | Lateral movement and unauthorized backend access indicate weak segmentation and logical access enforcement |
+| ISO 27001 A 5.16 Identity Management | Yes | Administrative access was obtained without sufficient identity lifecycle controls or anomaly detection |
+| ISO 27001 A 8.2 Privileged Access Rights | Yes | Elevated permissions were not adequately restricted or monitored |
+| ISO 27001 A 8.9 Configuration Management | Yes | Backend scripts and exposed endpoints were not securely configured or hardened |
+| ISO 27001 A 8.12 Data Leakage Prevention | Yes | Sensitive data was exfiltrated without effective egress monitoring or prevention controls |
 
 ---
 
@@ -129,7 +133,6 @@ Similar to ISO 27001’s Annex SL high-level structure, ISO 42001:2023 follows t
 ---
 
 ## v. AI Governance Failure
-
 In February 2026, Moltbook disclosed a significant data breach. The platform was notable for being developed primarily through AI-assisted coding practices, often referred to as “vibe-coding,” with minimal traditional development oversight. The incident illustrates the risks associated with overreliance on AI-generated infrastructure when governance, validation, and security controls are insufficient.
 
 The breach resulted from a critical misconfiguration within the Supabase backend environment, where public read and write permissions were enabled and Row-Level Security (RLS) policies were not implemented. This misconfiguration exposed sensitive data and API credentials, demonstrating failures in lifecycle validation, access control governance, and deployment oversight.
@@ -143,7 +146,3 @@ The incident aligns with several ISO 42001 Annex A governance control objectives
 | A.4: Resources for AI Systems | Document and manage technical resources, tooling, and computing assets | Exposure of approximately 1.5 million API tokens, including OpenAI and AWS credentials |
 | A.9: Data for AI Systems | Ensure data quality, protection, and secure handling of AI-related data environments | Compromise of approximately 35,000 email addresses and private messages |
 | A.8: Information for Interested Parties | Establish reporting mechanisms and structured incident communication | Breach detection relied on external researchers rather than internal monitoring controls |
-| ISO 27001 A 5.16 Identity Management | Yes | Administrative access was obtained without sufficient identity lifecycle controls or anomaly detection |
-| ISO 27001 A 8.2 Privileged Access Rights | Yes | Elevated permissions were not adequately restricted or monitored |
-| ISO 27001 A 8.9 Configuration Management | Yes | Backend scripts and exposed endpoints were not securely configured or hardened |
-| ISO 27001 A 8.12 Data Leakage Prevention | Yes | Sensitive data was exfiltrated without effective egress monitoring or prevention controls |
