@@ -1,7 +1,17 @@
 
 
-# Week 4 Group Project – Defensive Engineer Checklist
-**Role: SOC L3 / Detection Engineering Lead**
+# Week 4 Group Project: Defensive Engineer Checklist
+## Incident Summary
+On March 14, the organization experienced a multi-stage Active Directory compromise that escalated from password spray activity to domain control within approximately six hours. The attacker compromised a service account, modified privileged groups, and cleared security logs on a domain controller. Directory replication (DCSync) was abused to extract credential material, and evidence indicates access to the KRBTGT account enabled domain authentication manipulation. Domain administrator credentials were used from a non-IT workstation, followed by malware deployment (NullHack.exe) and an encryption event consistent with ransomware. Network telemetry suggested possible data exfiltration.
+
+Remediation included endpoint reimaging, password resets, administrative credential rotation, and Active Directory restoration from backup. However, KRBTGT rotation occurred only once and post-remediation analysis revealed valid Kerberos authentication for a hostname not present in Active Directory. The authentication was cryptographically valid and showed no signs of malware or brute force activity, indicating potential persistent compromise. The incident was classified as a persistent domain compromise.
+
+Control weaknesses included limited authentication auditing, incomplete domain controller log ingestion, inconsistent endpoint protection enforcement, and absence of immutable logging. These gaps reduced detection capability and allowed the attacker to escalate privileges and maintain persistence.
+
+### Role Summary (Defensive Engineer)
+As a Defensive Engineer and Detection Engineering Lead, my role focused on identifying detection failures and visibility gaps that allowed the attack to proceed undetected. Analysis covered SIEM telemetry gaps, missed alerts, and insufficient coverage for domain compromise techniques such as DCSync and log tampering.
+
+Deliverables included a Detection Failure Report, Logging and Telemetry Gap Analysis, 30 60 90 Day Security Hardening Plan, and SIEM and Monitoring Improvement Blueprint. These outputs aim to improve detection capabilities and strengthen security monitoring to reduce future risk.
 
 ## Incident Overview & Executive Summary
 On March 14, the organization experienced a multi-stage Active Directory compromise that escalated from password spray activity to full domain control within approximately six hours.
