@@ -154,8 +154,6 @@ This phased approach improves visibility, strengthens detection capabilities, an
 ## 5. SIEM & Monitoring Improvement Blueprint
 This blueprint outlines and recommends suggestions for improving the detection coverage, correlation rules, and log ingestion to enhance visibility into domain compromise techniques and reduce future detection gaps. 
 
-## 7. SIEM & Monitoring Improvement Blueprint
-
 | Area | Improvement | Impact |
 |------|------------|--------|
 | Log Sources | Ingest logs from all domain controllers, Azure AD, endpoint telemetry, and security appliances with immutable storage. | Improves visibility into authentication abuse, replication activity, and endpoint events. |
