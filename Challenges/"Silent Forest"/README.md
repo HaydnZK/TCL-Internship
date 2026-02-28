@@ -1,19 +1,7 @@
-
-
 # Week 4 Group Project: Defensive Engineer Checklist
-## Incident Summary
-On March 14, the organization experienced a multi-stage Active Directory compromise that escalated from password spray activity to domain control within approximately six hours. The attacker compromised a service account, modified privileged groups, and cleared security logs on a domain controller. Directory replication (DCSync) was abused to extract credential material, and evidence indicates access to the KRBTGT account enabled domain authentication manipulation. Domain administrator credentials were used from a non-IT workstation, followed by malware deployment (NullHack.exe) and an encryption event consistent with ransomware. Network telemetry suggested possible data exfiltration.
+**Role: SOC L3 / Detection Engineering Lead**
 
-Remediation included endpoint reimaging, password resets, administrative credential rotation, and Active Directory restoration from backup. However, KRBTGT rotation occurred only once and post-remediation analysis revealed valid Kerberos authentication for a hostname not present in Active Directory. The authentication was cryptographically valid and showed no signs of malware or brute force activity, indicating potential persistent compromise. The incident was classified as a persistent domain compromise.
-
-Control weaknesses included limited authentication auditing, incomplete domain controller log ingestion, inconsistent endpoint protection enforcement, and absence of immutable logging. These gaps reduced detection capability and allowed the attacker to escalate privileges and maintain persistence.
-
-### Role Summary (Defensive Engineer)
-As a Defensive Engineer and Detection Engineering Lead, my role focused on identifying detection failures and visibility gaps that allowed the attack to proceed undetected. Analysis covered SIEM telemetry gaps, missed alerts, and insufficient coverage for domain compromise techniques such as DCSync and log tampering.
-
-Deliverables included a Detection Failure Report, Logging and Telemetry Gap Analysis, 30 60 90 Day Security Hardening Plan, and SIEM and Monitoring Improvement Blueprint. These outputs aim to improve detection capabilities and strengthen security monitoring to reduce future risk.
-
-## Incident Overview & Executive Summary
+## 1. Incident Overview & Executive Summary
 On March 14, the organization experienced a multi-stage Active Directory compromise that escalated from password spray activity to full domain control within approximately six hours.
 
 The attack sequence included:
@@ -35,7 +23,7 @@ The incident has been classified as a persistent compromise due to continued evi
 
 ---
 
-## 1. Initial Incident Review
+## 2. Initial Incident Review
 | Artifact | Finding | Evidence |
 |---------|---------|-----------|
 | Initial Access | Password spray -> r.sharma | Azure sign-in anomaly, failed logins |
@@ -49,7 +37,7 @@ The attack began with password spraying against WS-17, ultimately granting acces
 
 ---
 
-## 2. SIEM Visibility Gap Analysis
+## 3. SIEM Visibility Gap Analysis
 Following analysis of the event timeline, associated log data, analyst communications, telemetry, and recovered artifacts, multiple visibility gaps were identified within the SIEM architecture. These gaps significantly limited early detection and hindered full reconstruction of attacker activity.
 
 The absence of comprehensive authentication monitoring, incomplete domain controller log ingestion, limited PowerShell visibility, and insufficient endpoint telemetry collectively created conditions in which the adversary was able to escalate privileges, establish persistence, conduct data exfiltration, and ultimately deploy ransomware with minimal resistance.
@@ -69,39 +57,81 @@ The findings below outline the specific control weaknesses that contributed to t
 | SOC Operations | SOC identified anomalies ~30 minutes behind attacker actions | No automated correlation for spray, replication abuse, or DC log clearing | Attacker maintained operational advantage |
 
 ### Notes
-- Limited PowerShell transcription logging significantly reduced visibility into attacker command execution.
-- Absence of centralized Azure AD advanced auditing limited insight into cloud-based authentication abuse.
-- Kerberos monitoring lacked full ticket lifecycle coverage, preventing early detection of credential misuse.
-- DC02 did not appear to forward logs to the SIEM, creating a domain controller blind spot.
-- Log clearing on DC01 was visible but not escalated immediately, indicating an alerting or triage failure.
-- No evidence of immutable or write-once logging architecture was observed.
-- Endpoint telemetry did not capture ransomware staging or scheduled task persistence activity.
-- Although exfiltration volume was detected, lack of DLP controls allowed data loss to proceed uninterrupted.
-- Memory artifacts from DC01 confirm execution of Mimikatz for credential dumping; however, no corresponding process creation logs, Defender alerts, file creation events, or script execution telemetry were ingested into the SIEM, indicating a critical lack of endpoint visibility on a domain controller during credential access activity.
+- PowerShell transcription and Azure AD auditing gaps reduced visibility into credential abuse and command activity.
+- Domain controller log forwarding and immutable logging were absent, creating blind spots and enabling log tampering.
+- Endpoint telemetry and Defender enforcement did not capture malware staging, scheduled tasks, or credential dumping activity.
+- Data exfiltration occurred without DLP or egress controls, allowing large outbound transfer despite detection of volume.
+- Memory artifacts confirmed Mimikatz execution, but corresponding process and telemetry logs were not ingested into the SIEM, limiting forensic reconstruction.
 
 ---
 
-## 3. Detection Failure Analysis
-Analysis of the incident timeline, telemetry, and available logs reveals systemic visibility and detection gaps that enabled the attacker to escalate privileges, extract credentials, and maintain persistence with minimal resistance. While limited telemetry existed, it was insufficient to detect critical domain compromise techniques.
+## 4. Detection Failure Analysis
+Analysis of telemetry and logs reveals visibility and detection gaps that enabled privilege escalation and persistence.
 
 Key detection and visibility gaps:
+- Incomplete authentication and Azure AD auditing limited detection of password spraying and credential abuse.
+- Absence of domain controller log ingestion (particularly DC02) created a blind spot for replication and privilege escalation activity.
+- Limited PowerShell and command logging prevented full reconstruction of attacker actions.
+- Scheduled task and persistence telemetry were not captured, allowing persistence mechanisms to operate undetected.
+- Immutable logging and log forwarding protections were absent, enabling log tampering and forensic gaps.
+- Defender enforcement and endpoint telemetry did not detect credential dumping or malware activity.
+- DLP and egress controls were not present, permitting data exfiltration without prevention.
+- SOC detection lag reduced response speed relative to attacker activity.
+- Post-incident validation did not fully verify persistence artifacts or scheduled tasks, reducing confidence in complete remediation.
+- KRBTGT single rotation left potential residual domain trust risk and ticket forgery concerns.
 
-- Incomplete authentication and Azure AD auditing limited visibility into initial credential abuse and password spray activity.
-- Absence of comprehensive domain controller log ingestion (particularly from DC02) created a blind spot during privilege escalation and replication activity.
-- Limited PowerShell and command execution logging prevented full reconstruction of attacker actions and tool usage.
-- No scheduled task or persistence telemetry from DC02 allowed persistence mechanisms to operate undetected.
-- Lack of immutable logging and log forwarding protections enabled log tampering and forensic visibility loss.
-- Insufficient endpoint telemetry and Defender enforcement allowed credential dumping and malware execution without early detection.
-- Absence of DLP and egress controls permitted large-scale data exfiltration without prevention.
-- SOC detection and alerting lag (~30 minutes behind attacker activity) reduced the ability to respond in real time.
-- IR processes did not validate scheduled task artifacts or persistence mechanisms during post-incident analysis, allowing potential residual persistence to go undetected and reducing confidence in complete remediation.
-- KRBTGT rotation occurred only once during remediation, contrary to best practice double-rotation requirements, leaving potential risk of ticket reuse and persistent domain trust artifacts.
+These findings demonstrate that while some telemetry existed, detection engineering coverage and operational monitoring were insufficient to identify domain compromise techniques such as DCSync, credential dumping, and Golden Ticket persistence.
 
-These gaps collectively demonstrate that while logs and telemetry existed in part, detection engineering and monitoring coverage were insufficient to identify and stop domain compromise techniques such as DCSync, credential dumping, and Golden Ticket-style persistence.
+### Detection Logic vs. Telemetry Availability
+It's important to distinguish between three separate failure categories observed during this incident:
+
+1. **Telemetry Not Enabled:** Certain logs (e.g., PowerShell transcription, enhanced Azure AD auditing, replication permission monitoring) were not configured or centrally ingested, preventing detection opportunities altogether.
+2. **Telemetry Present but Not Correlated:** In several cases, relevant logs existed within Splunk or Defender, but correlation logic was insufficient to link related events (e.g., multiple failed logins followed by a success, abnormal replication activity patterns).
+3. **Alert Generated but Not Operationalized:** Alerts such as Azure AD “impossible travel” were generated but not escalated effectively, indicating weaknesses in alert prioritization, triage workflow, or severity classification.
+
+The failure was therefore not a complete absence of tooling, but a breakdown across configuration, detection engineering logic, and operational response processes.
+
+### Endpoint Protection Control Boundary Failure
+The execution of `Set-MpPreference -DisableRealtimeMonitoring $true` indicates that either Microsoft Defender tamper protection was not enforced or that Group Policy modification privileges were overly broad.
+
+This represents a control boundary failure in three areas:
+- Lack of strict privilege governance over GPO modification rights
+- Absence of change monitoring on security policy objects
+- Insufficient enforcement of tamper protection settings at the tenant or endpoint level
+
+Endpoint protection tools are only effective when configuration integrity is actively protected and monitored. In this case, security configuration itself became a compromise vector.
 
 ---
 
-## 4. Recommended Improvements
+## Relevant ISO 27001 Annex A Control References 
+- **ISO 27001 Annex A 8.15: Logging and Monitoring:** 
+  Logging and event data collection to support detection, forensic analysis, and operational visibility.
+- **ISO 27001 Annex A 8.16: Monitoring Activities:**
+  Continuous monitoring of systems and user activity to detect security events and policy violations.
+- **ISO 27001 Annex A 5.17: Authentication Information:**
+  Controls governing authentication mechanisms and protection of credentials to prevent unauthorized access.
+- **ISO 27001 Annex A 5.15: Access Control:**
+  Restriction and governance of user and system access based on least privilege and authorization.
+- **ISO 27001 Annex A 8.2: Identity Management:**
+  Management of user identities and access provisioning to ensure proper privilege allocation.
+- **ISO 27001 Annex A 8.7: Protection Against Malware:**
+  Controls for endpoint protection and malware prevention to reduce risk of compromise.
+- **ISO 27001 Annex A 8.18: Technical Vulnerability Management:**
+  Processes for identifying and remediating technical vulnerabilities in systems and applications.
+- **ISO 27001 Annex A 8.9: Configuration Management:**
+  Governance of system configurations to maintain security posture and prevent unauthorized changes.
+- **ISO 27001 Annex A 8.12: Data Leakage Prevention:**
+  Controls to prevent unauthorized data exfiltration and protect sensitive information.
+- **ISO 27001 Annex A 8.20: Network Security:**
+  Protection of network communications and monitoring to detect and prevent malicious activity.
+- **ISO 27001 Annex A 5.24: Incident Management:**
+  Structured processes for identifying, responding to, and recovering from security incidents.
+- **ISO 27001 Annex A 5.25: Post-Incident Review:**
+  Lessons learned and process improvements following security incidents to enhance resilience.
+
+---
+
+## 5. Recommended Improvements
 To address the gaps in visibility and detections identified in this analysis, security controls and monitoring capabilities must be enhanced across authentication, endpoint telemetry, domain controller logging, and SIEM detection engineering.
 
 Areas of improvement:
@@ -144,9 +174,16 @@ The following remediation strategy provides recommendations to address the criti
 
 This phased approach improves visibility, strengthens detection capabilities, and reduces organizational risk of future domain compromise.
 
+### Identity-Centric Risk and Persistence Considerations
+This compromise demonstrates that hybrid Active Directory environments are primarily vulnerable through identity abuse rather than malware-based intrusion. Credential access, replication abuse, and privilege escalation formed the core attack path.
+
+Additionally, single rotation of the KRBTGT account is insufficient following a domain compromise. Failure to perform a double-rotation leaves the possibility that previously forged Kerberos tickets (Golden Tickets) remain valid within their lifetime window, sustaining residual domain persistence risk.
+
+Effective remediation must therefore prioritize privileged identity governance, replication permission control, and continuous monitoring of domain trust boundaries.
+
 ---
 
-## 5. SIEM & Monitoring Improvement Blueprint
+## 6. SIEM & Monitoring Improvement Blueprint
 This blueprint outlines and recommends suggestions for improving the detection coverage, correlation rules, and log ingestion to enhance visibility into domain compromise techniques and reduce future detection gaps. 
 
 | Area | Improvement | Impact |
@@ -158,3 +195,14 @@ This blueprint outlines and recommends suggestions for improving the detection c
 | Monitoring Coverage | Expand monitoring to include task creation, persistence artifacts, and endpoint behavioral telemetry. | Enhances detection of post-compromise activity and persistence mechanisms. |
 
 The SIEM and monitoring improvements outlined above aim to strengthen visibility and detection capabilities across authentication, domain controller activity, and endpoint telemetry. By expanding log ingestion, enhancing detection rules, and improving correlation coverage, the organization can reduce blind spots that previously enabled undetected domain compromise. These improvements focus on early detection of credential abuse, replication activity, and persistence techniques, ensuring that security operations can identify and respond to threats with greater speed and accuracy.
+
+### Detection Engineering Maturity Shift
+The recommended improvements transition monitoring from isolated, event-based alerting to behavior-based and correlation-driven detection engineering.
+
+This includes:
+- Linking authentication anomalies across time windows
+- Correlating identity abuse with privilege escalation indicators
+- Monitoring replication rights and domain control plane behavior
+- Reducing alert fatigue through severity tuning and contextual enrichment
+
+The objective is not to increase alert volume, but to improve detection fidelity and investigative clarity by focusing on high-risk identity-centric attack paths.
