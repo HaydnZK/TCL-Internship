@@ -122,30 +122,25 @@ These improvements address the systemic monitoring and detection weaknesses that
 
 ### 30-60-90 Day Security Hardening Plan
 The following remediation strategy provides recommendations to address the critical security and visibility gaps identified in this analysis. These suggestions prioritize mitigation of high-risk control failures and detection weaknesses, progressing from immediate hardening to longer-term operational maturity.
-- 30 Day Focus: Immediate stabilization and detection improvements, including log ingestion fixes, authentication auditing, and SIEM rule deployment for domain compromise techniques.
-- 60 Day Focus: Expansion of telemetry, endpoint monitoring, and detection engineering capabilities to improve visibility into credential abuse and persistence mechanisms.
-- 90 Day Focus: Operational maturity through purple team validation, IR process enhancements, and continuous detection engineering to sustain long-term security improvements.
+# 30–60–90 Day Security Hardening Plan
 
-#### 0-30 Days (Immediate Stabilization)
-- Enable and centralize authentication auditing across Azure AD and domain controllers.
-- Ensure log ingestion from all domain controllers (including DC02).
-- Deploy detection rules for log clearing, DCSync activity, and abnormal Kerberos events.
-- Audit Defender configuration and enable tamper protection.
-- Validate SIEM correlation rules for credential abuse and privilege escalation.
-
-#### 31-60 Days (Detection and Monitoring Enhancements)
-- Expand PowerShell transcription and script block logging for command activity reconstruction.
-- Implement scheduled task and persistence monitoring with SIEM correlation rules.
-- Enhance endpoint telemetry and behavioral detection capabilities.
-- Deploy detection rules for replication abuse and Golden Ticket indicators.
-- Improve Active Directory configuration to mitigate DCSync risk through replication permission governance, GMSA controls, MFA enforcement, and PAM-based privilege management.
-
-#### 61-90 Days (Maturity and Validation)
-- Conduct purple team exercises to validate detection coverage.
-- Perform SOC tabletop exercises for domain compromise scenarios.
-- Implement continuous detection engineering lifecycle processes.
-- Validate DLP and egress control effectiveness.
-- Establish ongoing monitoring metrics (MTTD, MTTR, false positive rates).
+| Phase | Improvement | Control Area | Risk Mitigated |
+|-------|------------|--------------|----------------|
+| 0–30 Days | Enable and centralize authentication auditing across Azure AD and all domain controllers | Logging & Monitoring | Undetected credential abuse and lateral movement (ISO 27001 Annex A 8.15, 8.16, 5.17) |
+| 0–30 Days | Ensure log ingestion from all domain controllers, including DC02 | Logging & Monitoring | Blind spots in domain compromise visibility (ISO 27001 Annex A 8.15, 8.16) |
+| 0–30 Days | Deploy detection rules for log clearing (Event ID 1102), DCSync activity, and abnormal Kerberos events | Detection Engineering | Persistence concealment and credential theft via replication abuse (ISO 27001 Annex A 8.16, 8.2) |
+| 0–30 Days | Audit Microsoft Defender configuration and enable tamper protection | Endpoint Security | Endpoint control bypass and malware persistence (ISO 27001 Annex A 8.7, 8.18) |
+| 0–30 Days | Validate SIEM correlation rules for credential abuse and privilege escalation | SIEM & Detection Engineering | Password spraying and unauthorized privilege elevation (ISO 27001 Annex A 5.17, 8.16) |
+| 31–60 Days | Expand PowerShell transcription and script block logging | Logging & Forensics | Inability to reconstruct attacker command activity (ISO 27001 Annex A 8.15) |
+| 31–60 Days | Implement scheduled task and persistence monitoring with SIEM correlation | Endpoint & Detection Engineering | Undetected persistence mechanisms (ISO 27001 Annex A 8.9, 8.16) |
+| 31–60 Days | Enhance endpoint telemetry and behavioral detection capabilities | Endpoint Security | Advanced attacker evasion and lateral movement (ISO 27001 Annex A 8.7, 8.16) |
+| 31–60 Days | Deploy detection rules for replication abuse and Golden Ticket indicators | Identity & Detection Engineering | Kerberos ticket forgery and long-term domain compromise (ISO 27001 Annex A 5.17, 8.2, 8.16) |
+| 31–60 Days | Improve Active Directory configuration: restrict replication permissions, enforce MFA for privileged accounts, implement GMSA controls, and deploy PAM governance | Identity & Access Management | Unauthorized DCSync activity and privileged credential misuse (ISO 27001 Annex A 5.15, 5.18, 8.2) |
+| 61–90 Days | Conduct purple team exercises to validate detection coverage | Security Validation | Unverified detection capability and control effectiveness (ISO 27001 Annex A 8.16) |
+| 61–90 Days | Perform SOC tabletop exercises for domain compromise scenarios | Incident Readiness | Ineffective incident escalation and response coordination (ISO 27001 Annex A 5.24, 5.25) |
+| 61–90 Days | Implement continuous detection engineering lifecycle processes | Security Operations Governance | Stagnant detection logic and alert drift (ISO 27001 Annex A 8.16) |
+| 61–90 Days | Validate DLP and egress control effectiveness | Network & Data Protection | Large-scale data exfiltration over encrypted channels (ISO 27001 Annex A 8.12, 8.20) |
+| 61–90 Days | Establish ongoing monitoring metrics (MTTD, MTTR, false positive rates) | SOC Performance Management | Lack of measurable detection maturity and accountability (ISO 27001 Annex A 8.16) |
 
 This phased approach improves visibility, strengthens detection capabilities, and reduces organizational risk of future domain compromise.
 
