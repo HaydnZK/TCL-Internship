@@ -42,7 +42,7 @@ Ploutus leverages multiple techniques mapped by the MITRE ATT&CK framework:
 
 ---
 
-##Indicators of Compromise
+## Indicators of Compromise
 Files associated with Ploutus include:
 - Newage.exe
 - Color.exe
