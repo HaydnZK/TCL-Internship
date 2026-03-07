@@ -4,7 +4,7 @@
 ## The Scenario
 In this simulated high-stakes response to a domain-wide ransomware and Kerberos-based persistence attack, I served as the Defensive Engineering Lead. My primary focus was performing a comprehensive post-mortem of SIEM visibility gaps and telemetry failures that allowed an adversary to achieve DCSync and KRBTGT compromise undetected. I analyzed fragmented logs (Event IDs 4662, 4769, 1102) to identify blind spots in Microsoft Defender and Splunk alerting, specifically regarding Kerberos encryption anomalies (0x17 spikes) and unauthorized directory replication.
 
-Beyond the technical audit, I authored a 30-60-90 Day Security Hardening Plan and a SIEM Improvement Blueprint. These deliverables focused on implementing a tiered administrative model, automating KRBTGT rotation policies, and developing custom detection logic for Golden Ticket persistence—a critical need after the discovery that the compromise survived initial remediation efforts.
+Beyond the technical audit, I authored a 30-60-90 Day Security Hardening Plan and a SIEM Improvement Blueprint. These deliverables focused on implementing a tiered administrative model, automating KRBTGT rotation policies, and developing custom detection logic for Golden Ticket persistence; a critical need after the discovery that the compromise survived initial remediation efforts.
 
 ### Roles
 - Strategic Leader: Orchestrated crisis coordination, managed stakeholder communication, and defined the overall remediation and disclosure strategy.
