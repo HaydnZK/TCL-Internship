@@ -1,4 +1,4 @@
-#The Timeline of Ransomware
+# The Timeline of Ransomware
 ## Description 
 This research study analyzes the evolution of ransomware from its 1989 origins to modern cybercrime operations. It explores the technical shifts in encryption, the professionalization of Ransomware-as-a-Service (RaaS), and the transition from simple data locking to complex triple-extortion tactics.
 
