@@ -5,7 +5,6 @@ This research study analyzes the evolution of ransomware from its 1989 origins t
 ---
 
 ## The AIDS Trojan (PC Cyborg): 1989
-
 ### 1. Overview
 The AIDS Trojan was the first documented instance of ransomware and was created by biologist Joseph Popp. 
 
