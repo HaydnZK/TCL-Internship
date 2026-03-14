@@ -2,6 +2,20 @@
 ## Description 
 This research study analyzes the evolution of ransomware from its 1989 origins to modern cybercrime operations. It explores the technical shifts in encryption, the professionalization of Ransomware-as-a-Service (RaaS), and the transition from simple data locking to complex triple-extortion tactics.
 
+### Table of Contents
+* [The Aids Trojan (PC Cyborg): 1989](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#the-aids-trojan-pc-cyborg-1989)
+* [The Birth of Cryptovirology: 1996](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#the-birth-of-cryptovirology-1996)
+* [Gpcode (PGPCoder) and Archievus: 2005 to 2006](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#gpcode-pgpcoder--archievus-2005-2006)
+* [Winlock (Trojan.Winlock): 2006 to 2007](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#winlock-trojanwinlock-2006-2007)
+* [Reventon: 2010 to 2012](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#reveton-2010-2012)
+* [CryptoLocker: 2013](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#cryptolocker-2013)
+* [Tox RaaS: 2015](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#tox-raas-2015)
+* [The Tactical Explosion (Locky and Petya): 2016](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#the-tactical-explosion-locky--petya-2016)
+* [Global Disruption (WannaCry and NotPetya): 2017](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#global-disruption-wannacry--notpetya-2017)
+* [GandCrab: 2018](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#gandcrab-2018)
+* [Maze: 2019](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#maze-2019)
+* [Brain Cipher: 2024](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#brain-cipher-2024)
+
 ---
 
 ## The AIDS Trojan (PC Cyborg): 1989
