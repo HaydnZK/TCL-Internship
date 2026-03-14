@@ -56,6 +56,10 @@ Shortly after AIDS appeared, researchers released and distributed what they call
 - **AIDSOUT:** This tool was created by Jim Bates and was designed to delete the trojan
 - **AIDSCLEAR:** This program was created to retrieve and restore the hidden and encrypted files and directories. 
 
+### Relevant Photos
+* [AIDS Trojan Floppy Disk](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/01_AIDS_Floppy_Disk.webp)
+* [AIDS Trojan Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/02_AIDS_Ransom_Note.webp)
+
 ---
 
 ## The Birth of Cryptovirology: 1996
@@ -152,6 +156,11 @@ While both used asymmetric cryptography and RSA to lock files, the two malwares 
 * **The Affiliate Purchase Scheme:** Instead of a direct ransom, victims were directed to online pharmacies to buy medication. The attacker earned commissions on these sales, effectively outsourcing the payment processing to legitimate retail websites. 
 * **The Universal Password Incident:** Because the attacker used the same password for every victim, a researcher discovered the 30 digit key and published it. This immediately neutralized Archievus infections and taught the security community about the vulnerabilities of hardcoded keys.
 
+### Relevant Photos
+* [GPcode Ransom Note Example 1](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/03_GPcode_Ransom_Note(1).webp)
+* [GPcode Ransom Note Example 2](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/04_GPcode_Ransom_Note(2).webp)
+* [Archievus Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/05_Archievus_Ransom_Note.png)
+
 ---
 
 ## WinLock (Trojan.Winlock): 2006-2007
@@ -217,6 +226,9 @@ As opposed to today's ransomware, early WinLock variants were much less complex;
 This version of WinLock was characterized by high-volume, indiscriminate distribution rather than targeted attacks. Most of the victims of this ransomware were individual home users, as they were less likely to have robust backups or professional IT support. Notable real-world incidents include:
   - **The $16 Million Gang:** This was one of the more notable incidents involving a Moscow-based gang that operated WinLock. Upon their arrest in 2010, authorities revealed that the gang had extorted $16 million (approximately 500 million rubles) from roughly one million victims. 
   - **Widespread Infection:** It is suggested that hundreds of thousands of computers across Russia and Eastern Europe were infected at the peak of the campaign. This demonstrates how quickly small ransoms ($10 to $20) can accumulate.
+
+### Relevant Photos
+* [WinLock Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/06_WinLock_Ransom_Note.webp)
 
 ---
 
@@ -295,6 +307,9 @@ Since Reveton was another ransomware that primarily affected individual users ra
 - **The 2014 Pony Evolution:** Researchers discovered a major Reveton variant that had integrated the "Pony Stealer" module, allowing it to steal credentials for 17 different German banks and digital currency wallets like Bitcoin and Dogecoin.
 - **Raymond Uadiale Case (2018):** A former Microsoft engineer was sentenced to 18 months in prison for laundering nearly $94,000 in Reveton ransom payments through Liberty Reserve for a UK based co-conspirator.
 - **J.P. Morgan Extradition (2024):** Maksim Silnikau (aka "J.P. Morgan"), the alleged creator of Reveton and the Ransomware-as-a-Service model, was extradited from Poland to the U.S. to face charges for a decade long cybercrime spree.
+
+### Relevant Photos
+* [Reveton Law Enforcement Theme Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/07_reveton_Ransom_Note.png)
 
 ---
 
@@ -383,6 +398,9 @@ CryptoLocker infected between 234,000 and 250,000 systems in its first several m
 - **Australian Broadcasting Corporation (ABC):** ABC fell victim to a variant that disrupted internal systems. 
 - **Small Businesses and Charities:** Reports included a charity worker in London whose computer was encrypted via a phishing email disguised as a bank notification, highlighting how the malware hit non-profits and individuals alike. 
 - **Police Departments:** Multiple small-town police departments in the U.S. were reportedly infected and paid the ransom due to a lack of viable backups.
+
+### Relevant Photos
+* [CryptoLocker Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/08_CryptoLocker_Ransom_Note.webp)
 
 ---
 
@@ -483,6 +501,11 @@ Due to the anonymous, distributed nature of Tox and the number of affiliates inv
 - **The Creator's Retirement (June 2015):** Only a month after Tox launched, the creator posted a notice to the dark web portal. 
   - The developer claimed to be overwhelmed by the attention and the volume of infections. They offered to sell the whole platform, including source code and database, for 100 Bitcoins. 
   - This was the first time a major RaaS platform changed hands publicly on the dark web, setting the precedent for how these criminal enterprises are bought, sold, and rebranded, as seen later with more professional operations like GandCrab.
+
+### Relevant Photos
+* [TOX Ransomware Builder GUI](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/09_TOX_Ransomware_GUI.png)
+* [TOX Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/10_TOX_Ransom_Note.webp)
+* [TOX Decryption Instructions](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/11_TOX_How_To.jpg)
 
 ---
 
@@ -668,6 +691,10 @@ At its peak, Locky was sent to roughly half a million users each day, eventually
 **Petya:** The original version of Petya was much smaller than its counterpart, NotPetya, resulting in much less global disruption. Petya was primarily used for targeted criminal extortion; a couple of notable cases include:
 - **German HR Departments:** The primary known incidents involved localized phishing campaigns targeting Human Resources departments in Germany, where the malware was disguised as job applications.
 - **Conviction in Ukraine:** In August 2018, a Ukrainian citizen was sentenced to one year in prison for spreading a version of the original Petya online.
+
+### Relevant Photos
+* [Locky Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/12_Locky_Ransom_Note.png)
+* [Petya Boot Screen Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/13_Petya_Ransom_Note.webp)
 
 ---
 
@@ -922,6 +949,10 @@ NotPetya checks for the existence of its own filename in the `C:\Windows\` direc
 - **Telefónica:** The Spanish telecom giant was one of the first major companies hit, forcing its headquarters to tell all employees to shut down their computers immediately. 
 5. **Education & Small Scale** - **Asian Universities:** Over 4,000 schools and universities in Asia were hit, with thousands of students reportedly losing years of work on research and dissertations.
 
+### Relevant Photos
+* [NotPetya Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/14_NotPetya_Ransom_Note.webp)
+* [WannaCry Ransom Note GUI](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/15_WannaCry_Ransom_Note.png)
+
 ---
 
 ## GandCrab: 2018
@@ -1041,6 +1072,10 @@ GandCrab was responsible for more than 1.5 million infections, though its spray 
 3. **Government and Municipal Targets**
 - **Jackson County, Georgia (2019):** In March 2019, GandCrab crippled the county's entire IT network. The sheriff's office was forced to use pen and paper for arrest bookings, and the county ultimately paid a $400,000 ransom in Bitcoin to regain access to their data. 
 4. **The "Syrian Children" Incident:** In a rare moment of mercy, the GandCrab developers released free decryption keys specifically for victims in Syria. This occurred after a Syrian father tweeted that the ransomware had encrypted the only remaining photos of his deceased children and he could not afford the $600 ransom.
+
+### Relevant Photos
+* [GandCrab Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/16_GandCrab_Ransom_Note.jpg)
+* [GandCrab Wallpaper and File Header](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/17_GandCrab.jpg)
 
 ---
 
@@ -1166,6 +1201,10 @@ Maze might have been short-lived, but its lifespan was marked by aggressive high
 - **City of Pensacola, FL (December 2019):** Maze struck and demanded a $1 million ransom shortly after a high-profile shooting at a local Naval Air Station. The city did not pay the ransom, and the group leaked 2 GB of stolen data as retribution. This caused significant disruption to online payment services for sanitation and energy. 
 - **Allied Universal (November 2019):** This incident marked the start of the double extortion era. Once the security firm refused to pay a $2.3 million ransom, Maze leaked 700 MB of stolen data to prove their capability; this represented approximately 10% of the total data exfiltrated.
 
+### Relevant Photos
+* [Maze Ransom Note Example 1](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/18_Maze_Ransom_Note.png)
+* [Maze Ransom Note Example 2](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/19_Maze_Ransom_Note.webp)
+
 ---
 
 ## Brain Cipher: 2024
@@ -1282,3 +1321,11 @@ Brain Cipher's high impact attacks on government infrastructure and large profes
 - **Deloitte UK (December 2024):** The group claimed to have exfiltrated 1 TB of compressed data from Deloitte UK and posted the firm on their leak site. 
   - **The Response:** Deloitte stated that the incident was limited to a single client system sitting outside the main Deloitte network. No internal Deloitte systems were impacted, according to their official investigation. 
 - **International Targets:** The group's leak site has featured a diverse range of victims, including the Pulmonary Physicians of South Florida, Estar Seguros in Venezuela, and multiple manufacturing entities across North and South America.)
+
+### Relevant Photos
+* [Brain Cipher Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/20_Brain_Cipher_Ransom_Note.png)
+* [Brain Cipher Alternative Ransom Note](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/21_Brain_Cipher_Ransom_Note_Alt.png)
+* [Brain Cipher Data Recovery Portal](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/22_Brain_Cipher_Data_Recovery_Site.png)
+* [Brain Cipher Negotiator Chat Room](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/23_Brain_Cipher_Chat_Room.png)
+* [Brain Cipher Attack Announcement](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/24_Brain_Cipher_Attack_Announcement.png)
+* [Brain Cipher Data Leak Sample](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/25_Brain_Cipher_Data_Leak.png)
