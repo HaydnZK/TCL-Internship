@@ -188,3 +188,32 @@ https://tryhackme.com/room/posheclipse
 
 ### Relevant Photos
 * [Ransom_JPG.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/20_Question_Ten_Ransom_JPG.png)
+
+---
+
+## Attack Analysis
+### Potential Exploits Used
+While the lab focuses on the ngrok delivery and manual execution, ransomware families like BlackSun often leverage specific vulnerabilities for initial access or privilege escalation in real-world scenarios.
+- **ProxyShell (CVE-2021-34473, CVE-2021-34523):** Used for initial access into Microsoft Exchange servers. This allows attackers to drop webshells and begin the infection chain you saw.
+- **PrintNightmare (CVE-2021-34527):** A common privilege escalation exploit in Windows Print Spooler. It allows a standard user (like keegan) to gain the SYSTEM privileges you observed in the logs.
+- **Follina (CVE-2022-30190):** A remote code execution vulnerability in the Microsoft Support Diagnostic Tool (MSDT). Attackers use this to execute the initial PowerShell downloaders you investigated.
+
+### ISO 27001 Annex A Relations
+| Control ID | Control Name | Relation to this Challenge | 
+|------------|--------------|----------------------------|
+| A.8.5 |	Malware Protection |	The failure of endpoint protection to block `OUTSTANDING_GUTTER.exe` and `BlackSun.ps1` |
+| A.8.2	| Privileged Access Rights |	The attacker successfully escalating from a user to `NT AUTHORITY\SYSTEM` via scheduled tasks |
+| A.8.16 |	Monitoring Activities |	The importance of Splunk/Sysmon in detecting the `ngrok` C2 traffic and file creations |
+| A.8.13 |	Information Backup |	The ultimate protection against the ransomware impact you found in the `README.txt` |
+| A.8.23 |	Web Filtering |	Could have blocked the initial connection to the `ngrok.io` subdomains used for the download |
+
+### MITRE ATT&CK Techniques
+These are the specific behaviors tracked throughout the investigation.
+- **T1059.001 (PowerShell):** The primary engine used for the initial download and the execution of `BlackSun.ps1`.
+- **T1053.005 (Scheduled Task):** The method used for persistence and privilege escalation (`schtasks.exe /Create`).
+- **T1548.002 (Bypass User Account Control):** Used to elevate the binary to run with `SYSTEM` privileges.
+- **T1572 (Protocol Tunneling):** The use of `ngrok` to bypass firewall restrictions and establish a C2 channel.
+- **T1486 (Data Encrypted for Impact):** The final stage where BlackSun encrypted the files and dropped the `README.txt`.
+- **T1491.001 (Internal Defacement):** Changing the desktop wallpaper to `blacksun.jpg` to signal the compromise.
+
+
