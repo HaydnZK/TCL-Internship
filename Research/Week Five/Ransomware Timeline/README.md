@@ -16,6 +16,18 @@ This research study analyzes the evolution of ransomware from its 1989 origins t
 * [Maze: 2019](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#maze-2019)
 * [Brain Cipher: 2024](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Five/Ransomware%20Timeline/README.md#brain-cipher-2024)
 
+### Technical Evolution Summary
+The following table summarizes the key technical shifts in ransomware development from 1989 to the present day.
+| Era | Notable Strain | Primary Delivery | Encryption Standard | Extortion Model |
+| :--- | :--- | :--- | :--- | :--- |
+| **The Origin (1989)** | AIDS Trojan | Floppy Disk (Physical) | Simple Symmetric (Symmetric) | Physical Mail (Cash/Check) |
+| **Crypto Dawn (2005)** | Gpcode | Email Attachments | RSA-640 (Asymmetric) | Digital Wire Transfer |
+| **Modern Pivot (2013)** | CryptoLocker | Exploit Kits / Botnets | RSA-2048 + AES-256 | Cryptocurrency (Bitcoin) |
+| **The RaaS Era (2015)** | Tox | Affiliate Portal | AES-256 | Revenue Share (RaaS) |
+| **Worm Era (2017)** | WannaCry | EternalBlue (SMB Exploit) | RSA-2048 + AES-128 | Automated Kill-chain |
+| **Double Extortion (2019)** | Maze | Cobalt Strike / RDP | ChaCha20 + RSA-2048 | Data Exfiltration + Leak |
+| **Modern High-Tier (2024)** | Brain Cipher | CVE Exploits / IABs | Salsa20 + RSA-1024 | Triple Extortion + PR |
+
 ---
 
 ## The AIDS Trojan (PC Cyborg): 1989
