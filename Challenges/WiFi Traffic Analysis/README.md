@@ -34,6 +34,13 @@ The following breakdown shows the specific information I've identified within th
 - **HTML Form URL Encoded**
     - This is where the actual sensitive data's located.
     - Shows the cleartext key-value pairs for the login, specifically revealing the username and password.
+ 
+### Relevant Photos
+- [01 HTTP Handshake](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/01_HTTP_Handshake.png)
+- [02 HTTP Exposed Credentials](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/02_HTTP_Exposed_Credentials.png)
+- [03 HTTP Stream Exposed Application Code](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/03_HTTP_Stream_Exposed_Application_Code.png)
+- [04 HTTP Stream Exposed Credentials](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/04_HTTP_Stream_Exposed_Credentials.png)
+- [10 Packet HTTP Info](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/10_Packet_HTTP_Info.png)
 
 ---
 
@@ -58,6 +65,13 @@ While the sensitive credentials are hidden, I've analyzed the packet headers to 
 - **Transport Layer Security (TLS)**
     - Identifies the content type, version, and length.
     - Confirms the payload's encrypted application data, appearing only as jumbled nonsense.
+ 
+### Relevant Photos
+- [05 TLS Packets](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/05_TLS_Packets.png)
+- [06 TLS Packet Details](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/06_TLS_Packet_Details.png)
+- [07 TLS Stream Details](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/07_TLS_Stream_Details.png)
+- [08 Packet Layer 3 Info](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/08_Packet_Layer3_Info.png)
+- [09 Packet Layer 4 Info](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/09_Packet_Layer4_Info.png)
 
 ---
 
@@ -83,6 +97,9 @@ To protect against the vulnerabilities identified in this lab, I've outlined sev
 - **Enforce HTTPS and HSTS**: Ensuring all web traffic's encrypted makes the cleartext POST attack impossible. HSTS forces the browser to ignore insecure HTTP versions of a site.
 - **DNS over HTTPS (DoH)**: To prevent the metadata leakage seen in the DNS analysis, DoH encrypts the domain queries, hiding the user's browsing history from the network level.
 - **Network Segmentation**: Implementing port security and VLANs would make it much harder for an attacker to join the local network and capture this traffic in the first place.
+
+### Relevant Photos
+- [11 DNS List and Packet Info](https://github.com/HaydnZK/TCL-Internship/blob/main/Challenges/WiFi%20Traffic%20Analysis/11_DNS_List_And_Packet_Info.png)
 
 ---
 
