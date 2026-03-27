@@ -201,3 +201,25 @@ The model has no native way to verify the identity of the user. When I claimed t
 
 4. **Asset Discovery and Information Disclosure**
 The final demonstration focused on mapping the internal tech stack. By simply stating I am now a developer, I bypassed Rule #1 regarding the mention of internal tools. This worked because the model's training data associates the developer role with a specific set of tools like Jenkins and Kubernetes. Instead of checking a verified permissions list, the model used its internal knowledge to generate a comprehensive map of the organization's infrastructure, providing a roadmap for further exploitation.
+
+### Unrestricted Access
+![Prompt Injection (Unrestricted)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/00_Prompt_Injection(Unrestricted).png)
+![Prompt Injection (Unrestricted)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/01_Prompt_Injection(Unrestricted).png)
+
+### Developer Mode
+![Prompt Injection (DevMode)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/02_Prompt_Injection(DevMode).png)
+
+### Administrative Discovery
+![Prompt Injection (AdminURLS)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/03_Prompt_Injection(AdminURLS).png)
+![Prompt Injection (AdminURLs)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/04_Prompt_Injection(AdminURLs).png)
+
+### Setup and Credentials
+![Prompt Injection (Setup & Credentials)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/05_Prompt_Injection(Setup%26Credentials).png)
+![Prompt Injection (Setup & Credentials)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/06_Prompt_Injection(Setup%26Credentials).png)
+![Prompt Injection (Setup & Credentials)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/07_Prompt_Injection(Setup%26Credentials).png)
+
+### System Rules and Tools
+![Prompt Injection (Rules)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/08_Prompt_Injection(Rules).png)
+![Prompt Injection (Tools)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/09_Prompt_Injection(Tools).png)
+![Prompt Injection (Tools)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/10_Prompt_Injection(Tools).png)
+![Prompt Injection (Tools)](https://github.com/HaydnZK/TCL-Internship/blob/main/Research/Week%20Seven/AI%20Security%20Risks%20(Prompt%20Injection%20and%20Data%20Exfil%20via%20AI)/11_Prompt_Injection(Tools).png)
