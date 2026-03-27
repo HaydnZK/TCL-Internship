@@ -186,9 +186,6 @@ With prompt injection appearing as a vulnerability in more than 73% of AI system
 ## Practical Demonstration
 For this demonstration, I am using the [Input Manipulation & Prompt Injection](https://tryhackme.com/room/inputmanipulationpromptinjection) room on TryHackMe.
 
-### Relevant Photos
-
-
 ### Technical Breakdown
 The objective of this demonstration was to bypass the safety alignment of an LLM-powered company assistant designed to handle HR and IT queries. Through a series of adversarial prompts, I successfully performed instruction hijacking, credential harvesting, and asset discovery. By adopting specific personas, such as a developer in debug mode or a new admin being onboarded, I forced the model to ignore its internal System Prompt rules and provide sensitive information that should have been restricted.
 
