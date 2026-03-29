@@ -406,106 +406,92 @@ This Kahoot quiz focuses on DNS fundamentals and security-specific behaviors, wa
 
 ### Kahoot Questions
 1. Which DNS resolution type has the resolver do the heavy lifting for the client?
-   
-  A. Recursive (Correct: The resolver takes the full request and doesn't return until it has the final IP.)
-  B. Iterative (Wrong: The server just gives a referral to the next server instead of the final answer.)
-  C. Authoritative (Wrong: This is the server that actually holds the record, not the process of finding it.)
-  D. Root-Level (Wrong: This is a specific tier in the DNS hierarchy, not a method of resolution.)
+  - Recursive (Correct: The resolver takes the full request and doesn't return until it has the final IP.)
+  - Iterative (Wrong: The server just gives a referral to the next server instead of the final answer.)
+  - Authoritative (Wrong: This is the server that actually holds the record, not the process of finding it.)
+  - Root-Level (Wrong: This is a specific tier in the DNS hierarchy, not a method of resolution.)
 
 3. In the DNS hierarchy, which server comes immediately after the Root (.) server?
-   
-  A. TLD Servers (.com) (Correct: Top-Level Domains like .com or .org are the first stop after the Root.)
-  B. Authoritative Servers (Wrong: These are the very last step that holds the specific site record.)
-  C. Recursive Resolvers (Wrong: These are the middlemen searching the hierarchy, not a level within it.)
-  D. ISP DNS (Wrong: This is usually just a local recursive cache, not a part of the global hierarchy.)
+  - TLD Servers (.com) (Correct: Top-Level Domains like .com or .org are the first stop after the Root.)
+  - Authoritative Servers (Wrong: These are the very last step that holds the specific site record.)
+  - Recursive Resolvers (Wrong: These are the middlemen searching the hierarchy, not a level within it.)
+  - ISP DNS (Wrong: This is usually just a local recursive cache, not a part of the global hierarchy.)
 
 4. Which DNS packet section is used to match a specific request to its response?
-   
-  A. Transaction ID (Correct: This unique 16-bit ID ensures the client knows which answer belongs to which query.)
-  B. Flags (Wrong: These provide status info, like whether recursion is desired or if it's a response.)
-  C. Query Name (Wrong: This is the actual domain being searched (such as google.com), not a tracker.)
-  D. Resource Record (Wrong: This is the section that contains the actual data being returned (the IP).)
+  - Transaction ID (Correct: This unique 16-bit ID ensures the client knows which answer belongs to which query.)
+  - Flags (Wrong: These provide status info, like whether recursion is desired or if it's a response.)
+  - Query Name (Wrong: This is the actual domain being searched (such as google.com), not a tracker.)
+  - Resource Record (Wrong: This is the section that contains the actual data being returned (the IP).)
 
 5. You see a SERVFAIL (2) error code. What is a likely security-related cause?
-   
-  A. DNSSEC validation break (Correct: If a signature is invalid or hijacked, the server returns a SERVFAIL.)
-  B. Subdomain brute-forcing (Wrong: This leads to NXDOMAIN because most guessed names won't exist.)
-  C. Format error (Wrong: This triggers a FORMERR (1) because the server can't read the packet.)
-  D. Unauthorized ACL block (Wrong: This triggers a REFUSED (5) because the server policy blocked it.)
+  - DNSSEC validation break (Correct: If a signature is invalid or hijacked, the server returns a SERVFAIL.)
+  - Subdomain brute-forcing (Wrong: This leads to NXDOMAIN because most guessed names won't exist.)
+  - Format error (Wrong: This triggers a FORMERR (1) because the server can't read the packet.)
+  - Unauthorized ACL block (Wrong: This triggers a REFUSED (5) because the server policy blocked it.)
 
 6. An attacker is brute-forcing subdomains. Which RCODE will you see a massive burst of?
-   
-  A. NXDOMAIN (3) (Correct: Non-Existent Domain; most automated guesses will fail to find a real record.)
-  B. NOERROR (0) (Wrong: This means the search was successful, which is rare during random guessing.)
-  C. SERVFAIL (2) (Wrong: This is a server processing failure, not a name not found error.)
-  D. REFUSED (5) (Wrong: This means the server is actively ignoring you based on a policy.)
+  - NXDOMAIN (3) (Correct: Non-Existent Domain; most automated guesses will fail to find a real record.)
+  - NOERROR (0) (Wrong: This means the search was successful, which is rare during random guessing.)
+  - SERVFAIL (2) (Wrong: This is a server processing failure, not a name not found error.)
+  - REFUSED (5) (Wrong: This means the server is actively ignoring you based on a policy.)
 
 7. What is the main signature of a DGA (Domain Generation Algorithm) in DNS logs?
-   
-  A. High-entropy gibberish names (Correct: Algorithms create random strings that lack human patterns.)
-  B. Repeated queries for google.com (Wrong: This is just common, normal background noise.)
-  C. Large TXT record payloads (Wrong: This is a sign of tunneling or C2, not how the domain name is made.)
-  D. Slow, consistent heartbeats (Wrong: This is the timing of beaconing, not the look of the domain name.)
+  - High-entropy gibberish names (Correct: Algorithms create random strings that lack human patterns.)
+  - Repeated queries for google.com (Wrong: This is just common, normal background noise.)
+  - Large TXT record payloads (Wrong: This is a sign of tunneling or C2, not how the domain name is made.)
+  - Slow, consistent heartbeats (Wrong: This is the timing of beaconing, not the look of the domain name.)
 
 8. Which record type is the primary carrier for C2 and stealth tunneling?
    
-  A. TXT / NULL (Correct: These types can hold large amounts of custom, non-standard text or data.)
-  B. A / AAAA (Wrong: These are strictly for IPv4/IPv6 addresses and can't hold large data strings.)
-  C. MX / SRV (Wrong: These are for mail and services; suspicious for recon, but bad for moving data.)
-  D. PTR (Wrong: These are used for reverse lookups (IP to Name) and aren't used for smuggling.)
+  - TXT/NULL (Correct: These types can hold large amounts of custom, non-standard text or data.)
+  - A/AAAA (Wrong: These are strictly for IPv4/IPv6 addresses and can't hold large data strings.)
+  - MX/SRV (Wrong: These are for mail and services; suspicious for recon, but bad for moving data.)
+  - PTR (Wrong: These are used for reverse lookups (IP to Name) and aren't used for smuggling.)
 
 9. Why is Port 53 often a blind spot for security teams?
-   
-  A. It is usually wide open on firewalls (Correct: Most organizations allow DNS out so employees can browse.)
-  B. It uses encrypted traffic by default (Wrong: Standard DNS is plaintext; anyone can read it if they look.)
-  C. It is a TCP-only protocol (Wrong: DNS is primarily UDP, which is faster and easier to spoof.)
-  D. The packets are too small to inspect (Wrong: They are plenty big enough; they're just often ignored.)
+  - It is usually wide open on firewalls (Correct: Most organizations allow DNS out so employees can browse.)
+  - It uses encrypted traffic by default (Wrong: Standard DNS is plaintext; anyone can read it if they look.)
+  - It is a TCP-only protocol (Wrong: DNS is primarily UDP, which is faster and easier to spoof.)
+  - The packets are too small to inspect (Wrong: They are plenty big enough; they're just often ignored.)
 
 10. In tunneling, where is the stolen data typically stashed in the query?
-    
-  A. Encoded in the subdomain (Correct: Data is turned into a string and put before the attacker's domain.)
-  B. In the Transaction ID (Wrong: This field only has 2 bytes; way too small for stealing files.)
-  C. In the TTL value (Wrong: TTL is just a number for time; it doesn't support text or data strings.)
-  D. In the Root Server hint (Wrong: Clients don't send data to root servers when resolving subdomains.)
+  - Encoded in the subdomain (Correct: Data is turned into a string and put before the attacker's domain.)
+  - In the Transaction ID (Wrong: This field only has 2 bytes; way too small for stealing files.)
+  - In the TTL value (Wrong: TTL is just a number for time; it doesn't support text or data strings.)
+  - In the Root Server hint (Wrong: Clients don't send data to root servers when resolving subdomains.)
 
 11. What does low-and-slow beaconing aim to bypass?
-    
-  A. Volume-based alerts (Correct: By spacing out queries, the attacker avoids triggering "too many queries" alarms.)
-  B. DGA detection (Wrong: DGA is about how the name looks, not how often it's queried.)
-  C. Internal resolver logs (Wrong: Every query is still logged; low-and-slow just makes them harder to spot.)
-  D. Endpoint Protection (Wrong: EDR looks for malicious files; beaconing is a network behavior.)
+  - Volume-based alerts (Correct: By spacing out queries, the attacker avoids triggering "too many queries" alarms.)
+  - DGA detection (Wrong: DGA is about how the name looks, not how often it's queried.)
+  - Internal resolver logs (Wrong: Every query is still logged; low-and-slow just makes them harder to spot.)
+  - Endpoint Protection (Wrong: EDR looks for malicious files; beaconing is a network behavior.)
 
 12. A query is 250 characters long with no vowels. What is this a fingerprint of?
-    
-  A. Encoded data (Base64/Hex) (Correct: Large files are encoded into long, vowel-less strings for exfiltration.)
-  B. Recursive handoff (Wrong: Handoffs are internal server actions and don't change the query string.)
-  C. Standard TLD resolution (Wrong: TLDs like .com or .net are very short and human-readable.)
-  D. Active Directory recon (Wrong: AD recon looks for specific services like _ldap, not long gibberish.)
+  - Encoded data (Base64/Hex) (Correct: Large files are encoded into long, vowel-less strings for exfiltration.)
+  - Recursive handoff (Wrong: Handoffs are internal server actions and don't change the query string.)
+  - Standard TLD resolution (Wrong: TLDs like .com or .net are very short and human-readable.)
+  - Active Directory recon (Wrong: AD recon looks for specific services like _ldap, not long gibberish.)
 
 13. What is a Vertical Spike in DNS traffic usually a sign of?
-
-  A. An active data exfiltration leak (Correct: Moving a file requires thousands of queries in a very short time.)
-  B. Fast Flux infrastructure (Wrong: Fast Flux is about changing IPs, not necessarily sending more traffic.)
-  C. A dead-drop command (Wrong: Commands are usually small inbound signals to the malware.)
-  D. Normal off-hours updates (Wrong: Updates are usually consistent and flat in traffic charts.)
+  - An active data exfiltration leak (Correct: Moving a file requires thousands of queries in a very short time.)
+  - Fast Flux infrastructure (Wrong: Fast Flux is about changing IPs, not necessarily sending more traffic.)
+  - A dead-drop command (Wrong: Commands are usually small inbound signals to the malware.)
+  - Normal off-hours updates (Wrong: Updates are usually consistent and flat in traffic charts.)
 
 14. Why would an attacker set a TTL to 0 or 60 seconds?
+  - To bypass local cache and rotate IPs (Correct: It forces the victim to re-query and get the attacker's new IP.)
+  - To increase the speed of the DNS query (Wrong: Short TTLs make things slower because you can't use the cache.)
+  - To hide the query from the resolver (Wrong: The resolver is the one that receives the TTL in the first place.)
+  - To encrypt the DNS response (Wrong: TTL controls timing, not security or encryption.)
 
-  A. To bypass local cache and rotate IPs (Correct: It forces the victim to re-query and get the attacker's new IP.)
-  B. To increase the speed of the DNS query (Wrong: Short TTLs make things slower because you can't use the cache.)
-  C. To hide the query from the resolver (Wrong: The resolver is the one that receives the TTL in the first place.)
-  D. To encrypt the DNS response (Wrong: TTL controls timing, not security or encryption.)
-
-15. Which Wireshark filter isolates only outbound queries to see what hosts ask?
-    
-  A. dns.flags.response == 0 (Correct: In Wireshark, a "0" flag in the response field means it's a query.)
-  B. dns.flags.response == 1 (Wrong: This is a valid filter, but it shows the answers, not the questions.)
-  C. dns.response.is == false (Wrong: This uses "is" and "false," which aren't valid Wireshark filter syntax.)
-  D. dns.query.only (Wrong: This isn't a real filter; Wireshark uses the flag system to identify queries.)
+15. Which Wireshark filter isolates only outbound queries to see what hosts ask? 
+  - dns.flags.response == 0 (Correct: In Wireshark, a "0" flag in the response field means it's a query.)
+  - dns.flags.response == 1 (Wrong: This is a valid filter, but it shows the answers, not the questions.)
+  - dns.response.is == false (Wrong: This uses "is" and "false," which aren't valid Wireshark filter syntax.)
+  - dns.query.only (Wrong: This isn't a real filter; Wireshark uses the flag system to identify queries.)
 
 17. Which MITRE technique involves hiding data in standard-looking outbound queries?
-    
-  A. Protocol Impersonation (Correct: Making malicious data look like a standard DNS request.)
-  B. Resource Hijacking (Wrong: This is taking over a server to use its CPU for things like mining.)
-  C. Network Service Scanning (Wrong: This is just looking for open ports, not hiding data.)
-  D. Phishing (Wrong: This is how you get in the door, not how you hide data leaving the network.)
+  - Protocol Impersonation (Correct: Making malicious data look like a standard DNS request.)
+  - Resource Hijacking (Wrong: This is taking over a server to use its CPU for things like mining.)
+  - Network Service Scanning (Wrong: This is just looking for open ports, not hiding data.)
+  - Phishing (Wrong: This is how you get in the door, not how you hide data leaving the network.)
