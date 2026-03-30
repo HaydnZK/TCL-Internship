@@ -647,186 +647,152 @@ This quiz walks through a full TrickBot “rob13” infection capture, guiding y
 
 ### Operation: SANDSTONES: A Deep-Dive Analysis of the TrickBot “rob13” Infection.**
 **Phase One: Initial Compromise & Host ID**
-1. When attempting to identify the first stage of an infection (the external downloader), which query would you use?
+1. When trying to identify the first stage of the infection (the external downloader), which query would we use?
+- `http.uri == "rob13"`
+  - Incorrect: This looks for the later C2 campaign tag, which isn't present in the very first packet.
 - `http.request`
-- `http.uri == “rob13”`
+  - Correct: This pulls all HTTP GET/POST requests, showing the initial call to the first-stage downloader.
 - `http_request_method == GET`
-- `ip.addr contains “malicious”`
-
-A is Correct: This pulls all HTTP GET/POST requests, showing the initial call to the first-stage downloader.
-B is Incorrect: This looks for the later C2 campaign tag, which isn't present in the very first packet.
-C is Syntax Error: Wireshark filters use dots (.), and values like GET must be in quotes.
-D is Syntax Error: `ip.addr` only accepts numerical values; it cannot contain a text string.
-
+  - Syntax Error: Wireshark filters use dots (.), and values like GET must be in quotes.
+- `ip.addr contains "malicious"`
+  - Syntax Error: ip.addr only accepts numerical values.
 
 2. After filtering for the initial request, what is the Source IP of the infected victim machine?
 - 10.2.17.2
+  - Incorrect: This is the IP of the Domain Controller, not the infected client.
 - 192.168.1.1
+  - Incorrect: This is a common home network default; it doesn't match this lab environment.
 - 10.2.17.101
+  - Correct: This is the confirmed internal IP of the victim workstation in this pcap.
 - 172.16.0.50
+  - Incorrect: This is a generic private IP used as a distractor.
 
-A is Correct: This is the confirmed internal IP of the victim workstation in this pcap.
-B is Incorrect: This is the IP of the Domain Controller, not the infected client.
-C is Incorrect: This is a common home network default; it doesn't match this lab environment.
-D is Incorrect: This is a generic private IP used as a distractor.
+3. Looking at that first HTTP request, what is the malicious Domain (URL) the victim is communicating with?
+- destinostumundo[.]com
+  - Correct: This is the actual domain hosting the first-stage downloader in this pcap.
+- checkip.amazonaws.com
+  - Incorrect: This is a legitimate Amazon service used later for an IP check.
+- sandstones.local
+  - Incorrect: This is the internal AD domain name, not an external URL.
+- microsoft-update.com
+  - Incorrect: This is a common "typosquatting" distractor that doesn't appear here.
 
-
-3. Looking at the first HTTP request, what is the malicious Domain (URL) the victim is communicating with?
-- Destinostumundo[.]com
-- checkip[.]amazonaws[.]com
-- Sandstones[.]local
-- microsoft-update[.]com
-
-A is Correct: This is the actual domain hosting the first-stage downloader in this pcap.
-B is Incorrect: This is a legitimate Amazon service used later for an IP check.
-C is Incorrect: This is the internal AD domain name, not an external URL.
-D is Incorrect: This is a common typosquatting distractor that doesn't appear here.
-
-
-### Phase Two: Initial Compromise & Host ID Continued
 4. In that same HTTP request, what is the specific URI (path) being requested from the server?
-- `.rob13/90/gate.php`
+- `/rob13/90/gate.php`
+  - Incorrect: This is the URI structure for later C2 beacons, not the initial stage.
 - `/index.html`
+  - Incorrect: This is a generic default page and isn't the malicious file.
 - `/admin/login.php`
-- `/layout/recruiter.php`
-
-A is Correct: This is the verified path for the TrickBot downloader on that domain.
-B is Incorrect: This is the URI structure for later C2 beacons, not the initial stage.
-C is Incorrect: This is a generic default page and isn't the malicious file.
-D is Incorrect: While suspicious-sounding, it isn't the artifact in this investigation.
-
+  - Incorrect: While suspicious-sounding, it isn't the artifact in this investigation.
+- `/layout/recruter.php`
+  - Correct: This is the verified path for the TrickBot downloader on that domain.
 
 5. To identify the NetBIOS name of the infected host (10.2.17.101), which query is the most efficient?
-- `ip.src == 10.2.17.101 && nbns`
-- `ip.addr == 10.2.17.101 && dhcp`
 - `nbns.name_contains == 10.2.17.101`
-- `find.host == “10.2.17.101”`
+  - Syntax Error: nbns doesn't support a name_contains operator for IP addresses.
+- `ip.src == 10.2.17.101 && nbns`
+  - Correct: This isolates Name Service traffic specifically from our victim's source IP.
+- `ip.addr == 10.2.17.101 && dhcp`
+  - Incorrect: While DHCP can show a name, dhcp is often a failed alias; bootp is the standard filter.
+- `find.host == "10.2.17.101"`
+  - Syntax Error: find.host is not a valid Wireshark display filter.
 
-A is Correct: This isolates Name Service traffic specifically from our victim's source IP.
-B is Incorrect: While DHCP can show a name, `dhcp` is often a failed alias; `bootp` is the standard filter.
-C is Syntax Error: `nbns` doesn't support a `name_contains` operator for IP addresses.
-D is Syntax Error: `find.host` is not a valid Wireshark display filter.
+6. After running the NBNS query, what is the confirmed hostname of the infected machine?
+- `DESKTOP-ADIJBT3`
+  - Correct: This is the workstation name associated with IP 10.2.17.101 in this capture.
+- `SANDSTONES-DC`
+  - Incorrect: This would be the name of a Domain Controller, not a workstation.
+- `DESKTOP-5BT9E19`
+  - Incorrect: This is a hostname from a different malware capture.
+- `WIN-SERV-2019`
+  - Incorrect: This is a generic server name used as a distractor.
 
-
-5. After running the NBNS query, what is the confirmed hostname of the infected machine? 
-- DESKTOP-5BT9E19
-- DESKTOP-ADIJBT3
-- SANDSTONES-DC
-- WIN-SERV-2019
-
-A is Correct: This is the workstation name associated with IP 10.2.17.101 in this capture.
-B is Incorrect: This would be the name of a Domain Controller, not a workstation.
-C is Incorrect: This is a hostname from a different malware capture.
-D is Incorrect: This is a generic server name used as a distractor.
-
-
-Phase Three: DNS & Infrastructure Discovery
-7. In order to find how the host located the Domain Controller (DC) via Advice Directory Service Records, which query should we run?
+7. We need to find how the host located the Domain Controller (DC) via Active Directory Service Records. Which query should we run?
 - `dns.flags.response == 1`
+  - Incorrect: This shows every DNS response, creating too much "noise."
 - `dns_type == SRV`
+  - Syntax Error: Wireshark uses dots and integers for types.
+- `ip.proto == DNS && srv.record`
+  - Syntax Error: srv.record is not a valid field in the Wireshark filter engine.
 - `dns.qry.type == 33`
-- `ip.proto == DNS & srv.record`
+  - Correct: Type 33 is the numerical identifier for SRV records used by Windows to find DCs.
 
-A is Correct: Type 33 is the numerical identifier for SRV records used by Windows to find DCs.
-B is Incorrect: This shows every DNS response, creating too much noise.
-C is Syntax Error: Wireshark uses dots and integers for types.
-D is Syntax Error: `srv.record` is not a valid field in the Wireshark filter engine.
-
-
-8. Looking at the SRV records, which internal IP address is identified as the Domain Controller for the SANDSTONES domain? 
+8. Looking at the SRV records, what internal IP address is identified as the Domain Controller for the SANDSTONES domain?
 - 10.2.17.1
+  - Incorrect: This is likely the default gateway (router), not the DC.
 - 10.2.17.101
-- 10.2.17.255
+  - Incorrect: This is the IP of the infected victim machine.
 - 10.2.17.2
+  - Correct: This IP responds to the _ldap queries and handles Kerberos requests.
+- 10.2.17.255
+  - Incorrect: This is the broadcast address for the subnet.
 
-A is Correct: This IP responds to the `_ldap` queries and handles Kerberos requests.
-B is Incorrect: This is likely the default gateway (router), not the DC.
-C is Incorrect: This is the IP of the infected victim machine.
-D is Incorrect: This is the broadcast address for the subnet.
-
-
-Phase Four: C2 Triage & Behavior
-9. When triaging top-talkers in the conversations window, why is the IP 179.191.108.56 prioritized over the Domain Controller (10.2.17.2)?
+9. When triaging Top Talkers in the Conversations window, why is the IP 179.191.108.58 prioritized over the Domain Controller (10.2.17.2)?
+- It has a higher total byte count than the Domain Controller.
+  - Incorrect: The DC actually has more bytes; volume doesn't always equal threat.
 - It shows persistent beaconing behavior to an external, non-business IP.
-- It has a higher total byte count than the DC.
-- It’s the only IP using the TCP protocol in the entire pcap.
-- It’s located on the same subnet as the victim machine.
-
-A is Correct: Persistent external beacons are a higher threat priority than internal DC traffic.
-B is Incorrect: The DC actually has more bytes; volume doesn't always equal threat.
-C is Incorrect: Most hosts in this pcap use TCP; this isn't a distinguishing factor.
-D is Incorrect: This is an external IP, not on the local subnet.
-
+  - Correct: Persistent external beacons are a higher threat priority than internal DC traffic.
+- It is the only IP using the TCP protocol in the entire pcap.
+  - Incorrect: Most hosts in this pcap use TCP; this isn't a distinguishing factor.
+- It is located on the same subnet as the victim machine.
+  - Incorrect: This is an external IP, not on the local subnet.
 
 10. To investigate the specific port used by this suspicious IP, which query would we use to isolate its traffic?
 - `tcp.port == 443`
+  - Incorrect: This shows standard HTTPS, hiding the malicious Port 449 traffic.
 - `addr.ip == 179.191.108.58`
-- `ip.addr == 179.191.108.58`
+  - Syntax Error: The correct field name is ip.addr, not addr.ip.
 - `ip.address == 179.191.108.58`
+  - Syntax Error: ip.address is not a valid filter.
+- `ip.addr == 179.191.108.58`
+  - Correct: This correctly filters for all traffic to and from the C2 IP.
 
-A is Correct: This correctly filters for all traffic to and from the C2 IP.
-B is Incorrect: This shows standard HTTPS, hiding the malicious Port 449 traffic.
-C is Syntax Error: The correct field name is `ip.addr`, not `addr.ip`.
-D is Syntax Error: `ip.address` is not a valid filter.
-
-
-11. After isolating the IP, we see it communicating on port 449. Why is this significant in a malware investigation?
-- It’s the default port for secure web browsing (HTTPS)
-- It indicates the host is attempting to use an encrypted VPN. 
+11. After isolating the IP, we see it communicating on Port 449. Why is this significant in a malware investigation?
+- It is the default port for secure web browsing (HTTPS).
+  - Incorrect: Port 443 is the default for HTTPS; 449 is a red flag.
+- It is a known non-standard port frequently used for TrickBot C2 communication.
+  - Correct: Port 449 is a specific fingerprint often seen in TrickBot infections.
+- It indicates the host is attempting to use an encrypted VPN.
+  - Incorrect: While encrypted, 449 isn't a standard VPN port.
 - It proves that the attacker has successfully gained Domain Admin privileges.
-- It’s a known non-standard port frequently used for Trickbot C2 communication.
+  - Incorrect: Port choice alone doesn't prove privileges.
 
-A is Correct: Port 449 is a specific fingerprint often seen in TrickBot infections.
-B is Incorrect: Port 443 is the default for HTTPS; 449 is a red flag.
-C is Incorrect: While encrypted, 449 isn't a standard VPN port.
-D is Incorrect: Port choice alone doesn't prove privileges.
+12. To view the Server Name Indication (SNI) across all encrypted sessions, which broad query helps isolate the TLS handshake events?
+- `ssl.all_names`
+  - Incorrect: ssl.all_names is not a valid Wireshark display filter.
+- `protocol.secure_layer == 1`
+  - Syntax Error: protocol.secure_layer is not a valid field.
+- `tls`
+  - Correct: Simply filtering for tls allows you to see all handshakes and encrypted records across any port.
+- `ip.proto == TLS`
+  - Syntax Error: TLS is a protocol layer, not a numerical IP protocol like TCP (6).
 
+13. Using the TLS query, we see a variety of different Server Names (SNI) for a single IP. What does this suggest?
+- SNI Spoofing: The malware is rotating names to blend in with legitimate traffic.
+  - Correct: Rotating famous domains on one IP is a classic tactic to bypass firewall signatures.
+- The user is visiting 50 different websites at the exact same time.
+  - Incorrect: The timestamps make this highly unlikely for a human.
+- The Domain Controller is trying to load balance the external connection.
+  - Incorrect: DCs don't load balance external C2 traffic.
+- The victim's browser cache is being cleared automatically by the system.
+  - Incorrect: Browser cache clearing doesn't generate new TLS handshakes.
 
-12. When we want to inspect the TLS handshake details for this suspicious C2 connection, which query would we use?
-- `ip.addr == 179.191.108.58 && tls.handshake.type == 1`
-- `ip.addr == 179.191.108.58 && tls.type == clien_hello`
-- `tls_handshake_type == 1 && src.ip == 179.191.108.58`
-- `ip.address == 179.191.108.58 && ssl.handshake`
-
-A is Correct: Type 1 is the numerical code for a Client Hello, containing the SNI.
-B is Incorrect: Wireshark uses numerical values for handshake types.
-C is Syntax Error: Wireshark uses dots and `ip.src` rather than `src.ip`.
-D is Syntax Error: `ip.address` is invalid; `ssl.handshake` is the deprecated name for `tls`.
-
-
-13. Using the TLS query, we see a variety of different Server Names (SNI). What does this suggest? 
-- The user is visiting 50 different websites at the exact same time. 
-- The DC is trying to load balance the external connection.
-- The malware is using SNI Spoofing to blend in with legitimate traffic. 
-- The victim’s browser cache is being cleared automatically by the system. 
-
-A is Correct: Rotating famous domains on one IP is a classic tactic to bypass firewall signatures.
-B is Incorrect: The timestamps make this highly unlikely for a human.
-C is Incorrect: DCs don't load balance external C2 traffic.
-D is Incorrect: Browser cache clearing doesn't generate new TLS handshakes.
-
-
-Phase Five: Persistence & Exfiltration
-14. To check if the malware is attempting to steal stolen data (such as system info or cookies), which query would we use to find HTTP POST requests containing potential exfiltration?
+14. To check if the malware is sending stolen data back to the attacker, which query would we use to find the outgoing data transfers?
 - `http.post.exfil == true`
+  - Incorrect: exfil is not a valid Wireshark field.
 - `request.type == POST_DATA`
+  - Syntax Error: request.type is not a valid field.
 - `ip.proto == HTTP && method == POST`
-- `http.request.method == “POST”`
-
-A is Correct: This is the standard filter to see data sent out from the victim to a server.
-B is Incorrect: exfil is not a valid Wireshark field.
-C is Syntax Error: `request.type` is not a valid field.
-D is Syntax Error: Wireshark uses `http.request.method`.
-
+  - Syntax Error: Wireshark uses http.request.method.
+- `http.request.method == POST`
+  - Correct: This is the standard filter to see data sent out from the victim to a server.
 
 15. In this pcap, we see POST requests to URIs ending in /81, /83, or /90. What do these numerical suffixes indicate in a rob13 infection?
-- Data Categorization: Each number identifies the type of stolen data (such as /81 for passwords).
 - Success Codes: They show the upload was 81% complete.
+  - Incorrect: HTTP status codes are 3 digits and not found at the end of a URI.
+- Data Categorization: Each number identifies the type of stolen data (such as /81 for passwords).
+  - Correct: These are specific TrickBot commands; /81 is for credentials and /90 is for system info.
 - Encryption Keys: They represent the bit-length of the encryption used.
+  - Incorrect: Encryption keys are not transmitted openly in the URI.
 - Server IDs: They represent which of the 90 different C2 servers is receiving the data.
-
-A is Correct: These are specific TrickBot commands; /81 is for credentials and /90 is for system info.
-B is Incorrect: HTTP status codes are 3 digits and not found at the end of a URI.
-C is Incorrect: Encryption keys are not transmitted openly in the URI.
-D is Incorrect: These numbers designate content, not server ID.
-
+  - Incorrect: These numbers designate content, not server ID.
