@@ -672,8 +672,8 @@ D is Incorrect: This is a generic private IP used as a distractor.
 
 
 3. Looking at the first HTTP request, what is the malicious Domain (URL) the victim is communicating with?
-- checkip[.]amazonaws[.]com
 - Destinostumundo[.]com
+- checkip[.]amazonaws[.]com
 - Sandstones[.]local
 - microsoft-update[.]com
 
@@ -683,7 +683,7 @@ C is Incorrect: This is the internal AD domain name, not an external URL.
 D is Incorrect: This is a common typosquatting distractor that doesn't appear here.
 
 
-### Phase One: Initial Compromise & Host ID Continued
+### Phase Two: Initial Compromise & Host ID Continued
 4. In that same HTTP request, what is the specific URI (path) being requested from the server?
 - `.rob13/90/gate.php`
 - `/index.html`
@@ -720,7 +720,7 @@ C is Incorrect: This is a hostname from a different malware capture.
 D is Incorrect: This is a generic server name used as a distractor.
 
 
-Phase Two: DNS & Infrastructure Discovery
+Phase Three: DNS & Infrastructure Discovery
 7. In order to find how the host located the Domain Controller (DC) via Advice Directory Service Records, which query should we run?
 - `dns.flags.response == 1`
 - `dns_type == SRV`
@@ -745,7 +745,7 @@ C is Incorrect: This is the IP of the infected victim machine.
 D is Incorrect: This is the broadcast address for the subnet.
 
 
-Phase 3: C2 Triage & Behavior
+Phase Four: C2 Triage & Behavior
 9. When triaging top-talkers in the conversations window, why is the IP 179.191.108.56 prioritized over the Domain Controller (10.2.17.2)?
 - It shows persistent beaconing behavior to an external, non-business IP.
 - It has a higher total byte count than the DC.
@@ -806,7 +806,7 @@ C is Incorrect: DCs don't load balance external C2 traffic.
 D is Incorrect: Browser cache clearing doesn't generate new TLS handshakes.
 
 
-Phase Four: Persistence & Exfiltration
+Phase Five: Persistence & Exfiltration
 14. To check if the malware is attempting to steal stolen data (such as system info or cookies), which query would we use to find HTTP POST requests containing potential exfiltration?
 - `http.post.exfil == true`
 - `request.type == POST_DATA`
