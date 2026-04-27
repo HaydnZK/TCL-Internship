@@ -1,5 +1,5 @@
 # DomainSleuth
-https://github.com/HaydnZK/DomainSleuth
+[Full Group Project Repo](https://github.com/HaydnZK/DomainSleuth)
 
 ## Vulnerability Research & Logic Mapping
 This phase involves identifying the specific Active Directory misconfigurations our system will detect. By defining the technical flags and security risks now, we create a blueprint for the coding phase and ensure the output is actionable for a blue team environment.
